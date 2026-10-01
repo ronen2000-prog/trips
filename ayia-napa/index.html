@@ -2,8 +2,8 @@
 <html lang="he" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>איה נאפה: חופים ושייט</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
 :root{--bg:#f8fafc;--surface:#ffffff;--ink:#111827;--muted:#4b5563;--line:#e5e7eb}
 @media (prefers-color-scheme:dark){:root{--bg:#0f172a;--surface:#1e293b;--ink:#f1f5f9;--muted:#94a3b8;--line:#334155}}
@@ -22,15 +22,17 @@ h1{margin:0;font-size:20px} header p{margin:4px 0 0;color:var(--muted);font-size
 .lg.tq span{box-shadow:0 0 0 3px #2dd4bf}
 .place-marker .dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;flex:0 0 auto;box-shadow:0 2px 6px rgba(0,0,0,.4)}
 .place-marker .label{direction:rtl;background:var(--surface);color:var(--ink);padding:3px 8px;border-radius:8px;border:1px solid var(--line);font-size:10px;font-weight:700;white-space:pre-line;text-align:center;line-height:1.35;box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.maplibregl-popup-content{background:#ffffff!important;color:#1f2937!important;box-shadow:0 6px 24px rgba(0,0,0,.35)!important;border-radius:12px!important;padding:0!important;overflow:hidden!important;max-width:300px!important;overflow-y:auto!important;direction:rtl!important;text-align:right!important;font-family:Calibri,'Segoe UI',Arial,sans-serif!important}
-.maplibregl-popup-tip{border-top-color:#ffffff!important;border-bottom-color:#ffffff!important}
-.maplibregl-popup-content img.thumb{display:block!important;width:100%!important;height:120px!important;object-fit:cover!important;background:#e5e7eb!important}
-.maplibregl-popup-content .popup-body{padding:12px 16px 14px!important}
-.maplibregl-popup-content h4{margin:0 0 2px!important;font-size:15px!important;font-weight:700!important;color:#111827!important}
-.maplibregl-popup-content .cat{font-size:11.5px!important;font-weight:700!important;margin:0 0 6px!important}
-.maplibregl-popup-content p{margin:0 0 8px!important;font-size:13.5px!important;line-height:1.55!important;color:#1f2937!important}
-.maplibregl-popup-content .src{font-size:11px!important;color:#6b7280!important;line-height:1.5!important}
-.maplibregl-popup-content .src a{color:#0f766e!important}
+.leaflet-popup-content-wrapper{background:#ffffff!important;color:#1f2937!important;box-shadow:0 6px 24px rgba(0,0,0,.35)!important;border-radius:12px!important;padding:0!important;overflow:hidden!important;max-width:300px!important;overflow-y:auto!important;direction:rtl!important;text-align:right!important;font-family:Calibri,'Segoe UI',Arial,sans-serif!important}
+.leaflet-popup-tip{background:#ffffff!important}
+.leaflet-popup-content{margin:0!important;width:280px!important;max-width:78vw!important}
+.lf-icon{background:none!important;border:none!important}
+.leaflet-popup-content-wrapper img.thumb{display:block!important;width:100%!important;height:120px!important;object-fit:cover!important;background:#e5e7eb!important}
+.leaflet-popup-content-wrapper .popup-body{padding:12px 16px 14px!important}
+.leaflet-popup-content-wrapper h4{margin:0 0 2px!important;font-size:15px!important;font-weight:700!important;color:#111827!important}
+.leaflet-popup-content-wrapper .cat{font-size:11.5px!important;font-weight:700!important;margin:0 0 6px!important}
+.leaflet-popup-content-wrapper p{margin:0 0 8px!important;font-size:13.5px!important;line-height:1.55!important;color:#1f2937!important}
+.leaflet-popup-content-wrapper .src{font-size:11px!important;color:#6b7280!important;line-height:1.5!important}
+.leaflet-popup-content-wrapper .src a{color:#0f766e!important}
 main{padding:8px 16px 40px;max-width:1100px;margin:0 auto}
 h2{font-size:18px;margin:22px 0 10px}
 .boats{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
@@ -148,9 +150,9 @@ function escH(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&am
 function host(u){try{return new URL(u).hostname.replace('www.','');}catch(e){return u;}}
 var lats=points.map(function(p){return p[2];}), lons=points.map(function(p){return p[3];});
 var bounds=[[Math.min.apply(null,lons),Math.min.apply(null,lats)],[Math.max.apply(null,lons),Math.max.apply(null,lats)]];
-var map=new maplibregl.Map({container:'map',style:'https://tiles.openfreemap.org/styles/liberty',center:[34.01,34.99],zoom:11});
-map.addControl(new maplibregl.NavigationControl(),'top-left');
-map.on('load',function(){map.fitBounds(bounds,{padding:50,duration:0});});
+var map=L.map('map',{zoomControl:true});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Tiles &copy; Esri'}).addTo(map);
+map.fitBounds([[Math.min.apply(null,lats),Math.min.apply(null,lons)],[Math.max.apply(null,lats),Math.max.apply(null,lons)]],{padding:[30,30]});
 var activePopup=null, markers=[];
 points.forEach(function(p){
   var name=p[0],cat=p[1],lat=p[2],lon=p[3],desc=p[4],srcs=p[5],img=p[6],csrc=p[7],tq=p[8];
@@ -161,20 +163,25 @@ points.forEach(function(p){
   var imgHtml=img?'<img class="thumb" src="'+img+'" loading="lazy" onerror="this.style.display=\'none\'">':'';
   var links=srcs.map(function(u){return '<a href="'+escH(u)+'" target="_blank" rel="noopener">'+escH(host(u))+'</a>';}).join(' · ');
   var html=imgHtml+'<div class="popup-body"><h4>'+escH(name)+'</h4><div class="cat" style="color:'+CATS[cat][1]+'!important">'+CATS[cat][0]+'</div>'+(tq?'<p style="color:#0f766e!important;font-weight:700!important">מים טורקיז במיוחד ('+escH(tq)+')</p>':'')+'<p>'+escH(desc)+'</p><div class="src">המלצה: '+links+'<br>מיקום: '+escH(csrc)+(img?' · תמונה: Google Maps':'')+'</div></div>';
-  var popup=new maplibregl.Popup({offset:14,anchor:'bottom',closeButton:false,maxWidth:'300px'}).setHTML(html);
-  popup.on('close',function(){if(activePopup===popup)activePopup=null;});
-  el.addEventListener('click',function(e){e.stopPropagation();var was=activePopup===popup;if(activePopup)activePopup.remove();if(!was){var h=map.getContainer().clientHeight;map.easeTo({center:[lon,lat],offset:[0,h/2-40],duration:350});popup.setLngLat([lon,lat]).addTo(map);var c=popup.getElement().querySelector('.maplibregl-popup-content');if(c)c.style.setProperty('max-height',(h-80)+'px','important');activePopup=popup;}});
-  var m=new maplibregl.Marker({element:el,anchor:'left'}).setLngLat([lon,lat]).addTo(map);
-  markers.push({m:m,cat:cat,el:el,tq:!!tq});
+  var m=L.marker([lat,lon],{icon:L.divIcon({className:'lf-icon',html:el,iconSize:null,iconAnchor:[9,9]})}).addTo(map);
+  m.on('click',function(){
+    var was=activePopup&&activePopup._src===m; map.closePopup(); activePopup=null;
+    if(was)return;
+    var h=map.getContainer().clientHeight;
+    var pop=L.popup({closeButton:false,maxWidth:300,maxHeight:Math.max(200,h-90),autoPanPaddingTopLeft:[10,10],autoPanPaddingBottomRight:[10,10],offset:[0,-8]}).setLatLng([lat,lon]).setContent(html);
+    pop._src=m; pop.openOn(map); activePopup=pop;
+  });
+  markers.push({m:m,cat:cat,tq:!!tq});
 });
-map.on('click',function(){if(activePopup)activePopup.remove();});
+map.on('popupclose',function(){activePopup=null;});
+function vis(x,on){if(on){if(!map.hasLayer(x.m))x.m.addTo(map);}else{map.removeLayer(x.m);}}
 document.querySelectorAll('.lg[data-cat]').forEach(function(b){b.addEventListener('click',function(){
   b.classList.toggle('on'); var on=b.classList.contains('on'), c=b.getAttribute('data-cat');
-  if(activePopup)activePopup.remove();
-  markers.forEach(function(x){if(x.cat===c)x.el.style.display=on?'':'none';});
+  map.closePopup();
+  markers.forEach(function(x){if(x.cat===c)vis(x,on);});
 });});
 var tqOn=false;document.getElementById('tqOnly').addEventListener('click',function(){
-  tqOn=!tqOn; this.classList.toggle('on',tqOn); if(activePopup)activePopup.remove();
-  markers.forEach(function(x){x.el.style.display=(!tqOn||x.tq)?'':'none';});
+  tqOn=!tqOn; this.classList.toggle('on',tqOn); map.closePopup();
+  markers.forEach(function(x){vis(x,!tqOn||x.tq);});
 });
 </script></body></html>
