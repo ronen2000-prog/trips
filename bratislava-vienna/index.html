@@ -677,12 +677,6 @@ h1{margin:0 0 4px;font-size:21px}
 .sub{color:var(--muted);font-size:14px;margin:0}
 .legend{display:flex;flex-wrap:wrap;gap:10px;padding:6px 16px;max-width:1100px;margin:0 auto;font-size:13px}
 .legend span{display:flex;align-items:center;gap:6px}
-.legend-hint{max-width:1100px;margin:10px auto 2px;padding:0 16px;font-size:19px;font-weight:800;color:#5eead4}
-.legend span{cursor:pointer;padding:3px 8px;border-radius:999px;border:1px solid transparent;user-select:none}
-.legend span:hover{border-color:#64748b}
-.legend span.on{border-color:#5eead4;background:rgba(94,234,212,.12)}
-.legend i.allc{background:conic-gradient(#0d9488 0 14%,#16a34a 0 28%,#7c3aed 0 43%,#e11d48 0 57%,#ea580c 0 71%,#475569 0 86%,#2563eb 0)}
-
 .legend i{width:12px;height:12px;border-radius:50%;display:inline-block;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4)}
 .views{display:flex;flex-wrap:wrap;gap:8px;padding:4px 16px 10px;max-width:1100px;margin:0 auto}
 .views button{font:inherit;font-size:14px;font-weight:700;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
@@ -717,16 +711,13 @@ main{max-width:1100px;margin:0 auto;padding:12px 16px 40px}
   <h1>ברטיסלבה + וינה, רביעי 18.11 עד ראשון 22.11</h1>
   <p class="sub">נחיתה בלילה שבין 17 ל-18. שלושה לילות ב-Loft Hotel Bratislava, שני לילות ב-The Social Hub Vienna, ומווינה ישר לשדה. הכל בתחבורה ציבורית.</p>
 </header>
-<div class="legend-hint">הקלק על צבע, להצגת האתרים הרלוונטיים בלבד</div>
 <div class="legend">
-  <span data-cat="bra"><i style="background:#0d9488"></i>ברטיסלבה עיר</span>
-  <span data-cat="nat"><i style="background:#16a34a"></i>טבע והליכות</span>
-  <span data-cat="vie"><i style="background:#7c3aed"></i>וינה</span>
-  <span data-cat="night"><i style="background:#e11d48"></i>ערב ואוכל ברטיסלבה</span>
-  <span data-cat="nightv"><i style="background:#ea580c"></i>ערב ואוכל וינה</span>
-  <span data-cat="air"><i style="background:#475569"></i>שדה תעופה ומלונות</span>
-  <span data-cat="kosher"><i style="background:#2563eb"></i>כשר: מסעדות ובתי חב"ד</span>
-  <span data-cat="all" class="on"><i class="allc"></i>הצג את כל הנקודות</span>
+  <span><i style="background:#0d9488"></i>ברטיסלבה עיר</span>
+  <span><i style="background:#16a34a"></i>טבע והליכות</span>
+    <span><i style="background:#7c3aed"></i>וינה</span>
+  <span><i style="background:#e11d48"></i>ערב ואוכל</span>
+  <span><i style="background:#475569"></i>שדה תעופה ומלונות</span>
+  <span><i style="background:#2563eb"></i>כשר: מסעדות ובתי חב"ד</span>
 </div>
 <div class="views">
   <button data-v="bra" class="on">ברטיסלבה</button>
@@ -831,7 +822,7 @@ main{max-width:1100px;margin:0 auto;padding:12px 16px 40px}
 //# sourceMappingURL=leaflet.js.map</script>
 <script>
 var T = {};
-var CAT = {bra:'#0d9488', nat:'#16a34a', wine:'#f59e0b', vie:'#7c3aed', night:'#e11d48', air:'#475569', kosher:'#2563eb', nightv:'#ea580c'};
+var CAT = {bra:'#0d9488', nat:'#16a34a', wine:'#f59e0b', vie:'#7c3aed', night:'#e11d48', air:'#475569', kosher:'#2563eb'};
 var points = [
  ['הכיכר המרכזית - העיר העתיקה','bra',48.1436775,17.1083432,'לב העיר העתיקה, נקודת פתיחה לכל הסיבוב.','https://lh3.googleusercontent.com/place-photos/AG9NLjBtUgBxgTo8Xv70VMogao-gTha8pE185K3OW1OLUHWtbHwy6dZ8AcMdfm-Wqr2QPvfknaJVcwD8bHD1s-QKl9gXi_eRWEQs4STu8IJ-CF3Ov6LAcd9aJV2nVakTJST9WsXn_QpRoTwIxL5KkDA=s4800-w800-h600',{r:4.7,n:410,pid:'ChIJk7r6j5CJbEcRYKQ3UmHRAl4',q:'Hlavné námestie Bratislava'}],
  ['הכנסייה הכחולה - עצירת צילום','bra',48.1434028,17.1169342,'כנסייה בתכלת מלא, עצירת צילום קצרה.','https://lh3.googleusercontent.com/place-photos/AG9NLjC3lBb08bXUt8CDGbaofVOXgA1PPM-TDBH-d8K_OdZ94cz6NpU0i68ZUuAeRwlsPhn5tm8c_WzN35o-f0CtVTG-z41dc_R6_LcKuBe35IMUgax_4Bm7bEwR3zArBsyVgDRqG6iO7uDwr4THkQ=s4800-w800-h600',{r:4.6,n:13974,pid:'ChIJ2Y8aBUGJbEcRNr6_VUhI9k0',q:'Blue Church Bratislava'}],
@@ -850,13 +841,13 @@ var points = [
  ['בית הונדרטווסר - אדריכלות צבעונית','vie',48.207337,16.394294,'בניין מגורים צבעוני ועקום, רואים רק מבחוץ.','https://lh3.googleusercontent.com/place-photos/AG9NLjASjXtG_Q7dxBgcmvcGdAontWA-6WiPa7zgBGGEB3R3PYf-BEpc7pTSWcFXh2rQNzlFvSNSvvE8QtejLS79JveyVqPEg9kh84KWbC9GJd1gMInF8WKjJ_OJBtLQHjMf-BvAes1zgvg9dUTRyYE5U3wISA=s4800-w736-h600',{r:4.5,n:35412,pid:'ChIJd7QUtBIHbUcRnIE5N35NVIQ',q:'Hundertwasserhaus'}],
  ['נאשמרקט - שוק אוכל','vie',48.1986178,16.3636494,'שוק אוכל ארוך, ובשבת בבוקר שוק פשפשים לידו.','https://lh3.googleusercontent.com/grass-cs/ACvplmM8kSV7QkgfsFp36EX2MV13fvCjJH0jVDylX6jBAbBl3FNOM-fFSujMZFZHAQRwcrYKK9coY_N_OMRKVZkzhCNt8yFo1OC7GPdSGdTf20z49xpJQ5VDvlhMUu2rr2YOzzXnsUb3hjIe1Qs=s4800-w800-h600',{r:3.6,n:1050,pid:'ChIJR1_EzZ0HbUcR9sCjK2-FMvg',q:'Naschmarkt Wien'}],
  ['מוזיאונסקוורטיר - כפר חורף','vie',48.2033369,16.3586166,'חצר ענקית לשבת בה, בנובמבר יש בה כפר חורף עם פונש.','https://lh3.googleusercontent.com/grass-cs/ACvplmMr3q0UHy5efzEJaAK9myv-fowTEGHAsX0ZIBJJLwzpw_NcTGKkl5-7kTBPIqnllKO-BPiS2Oc9gjjK0MFjgS83VoS6mUz4y-pK7t3JwehCNs55MxI6V9duliEiHoDkfY0_b0dMRw=s4800-w800-h600',{r:4.6,n:34288,pid:'ChIJ30_rPpAHbUcR_-tB67Mp1JQ',q:'MuseumsQuartier Wien'}],
- ['האוס דס מרס - מגדל נ"מ','nightv',48.1976502,16.3528868,'מגדל נ"מ מהמלחמה עם בר גג ותצפית. אופציה לערב שישי.','https://lh3.googleusercontent.com/place-photos/AG9NLjACWWnKCQj3-qKby4aoZ8GmgcJwh-sKlQI8pBwheMddTsCAv6roYh2c2u8jM6HU1Ot6uYzUAkygWN8ZlGv2QpJb-V3KGRDd5O-Sp1IN-bhWckkRsQLJLNUBmeDc3dpLC-y8i6Hl1jKuS47_aQ=s4800-w800-h600',{r:4.6,n:34655,pid:'ChIJ76FSlYkHbUcRMqbpRfg1Hhk',q:'Haus des Meeres'}],
- ['שוק שפיטלברג - שוק חג','nightv',48.2028268,16.3557957,'שוק חג בסמטאות צרות, קהל מקומי וצעיר.','https://lh3.googleusercontent.com/grass-cs/ACvplmMcmQmPPXcWnKbjBWNKLTMoH6aZoKF6Tl81UFsyGeSWS5CRm9kcROjCKjwXkZqRH350Ne0Tt5GfRbUkWONNIEolByWE1nesG7hFJRZezNdqbuL2Lml8FX1yDKjZit0GNILVdkl9PA=s4800-w800-h600',{r:4.5,n:495,pid:'ChIJnYQu7JEHbUcR_ITmoceVQEM',q:'Spittelberg Christmas Market'}],
- ['שוק רתהאוספלאץ - שוק והחלקה','nightv',48.210569,16.3599297,'שוק החג הגדול בווינה עם משטח החלקה.','https://lh3.googleusercontent.com/place-photos/AG9NLjDhYywrj5eIQ_F0H2ls-I0_V1y9gWvMW_PREdK1NK-I9WTL38kLbkWyL6-S_0cc3GzQ6lvt7JiGH2HFEMIFEhfzxhxjh-kQ0Bbz39jFz-8PlOVVQkF7YhYyYh8F0KRyhQjd4iGl3-_xNkmF0xcxG4UBnQ=s4800-w800-h600',{r:4.4,n:284,pid:'ChIJRYC7MAAHbUcR6uvDaFbz9rA',q:'Wiener Christkindlmarkt Rathausplatz'}],
+ ['האוס דס מרס - מגדל נ"מ','night',48.1976502,16.3528868,'מגדל נ"מ מהמלחמה עם בר גג ותצפית. אופציה לערב שישי.','https://lh3.googleusercontent.com/place-photos/AG9NLjACWWnKCQj3-qKby4aoZ8GmgcJwh-sKlQI8pBwheMddTsCAv6roYh2c2u8jM6HU1Ot6uYzUAkygWN8ZlGv2QpJb-V3KGRDd5O-Sp1IN-bhWckkRsQLJLNUBmeDc3dpLC-y8i6Hl1jKuS47_aQ=s4800-w800-h600',{r:4.6,n:34655,pid:'ChIJ76FSlYkHbUcRMqbpRfg1Hhk',q:'Haus des Meeres'}],
+ ['שוק שפיטלברג - שוק חג','night',48.2028268,16.3557957,'שוק חג בסמטאות צרות, קהל מקומי וצעיר.','https://lh3.googleusercontent.com/grass-cs/ACvplmMcmQmPPXcWnKbjBWNKLTMoH6aZoKF6Tl81UFsyGeSWS5CRm9kcROjCKjwXkZqRH350Ne0Tt5GfRbUkWONNIEolByWE1nesG7hFJRZezNdqbuL2Lml8FX1yDKjZit0GNILVdkl9PA=s4800-w800-h600',{r:4.5,n:495,pid:'ChIJnYQu7JEHbUcR_ITmoceVQEM',q:'Spittelberg Christmas Market'}],
+ ['שוק רתהאוספלאץ - שוק והחלקה','night',48.210569,16.3599297,'שוק החג הגדול בווינה עם משטח החלקה.','https://lh3.googleusercontent.com/place-photos/AG9NLjDhYywrj5eIQ_F0H2ls-I0_V1y9gWvMW_PREdK1NK-I9WTL38kLbkWyL6-S_0cc3GzQ6lvt7JiGH2HFEMIFEhfzxhxjh-kQ0Bbz39jFz-8PlOVVQkF7YhYyYh8F0KRyhQjd4iGl3-_xNkmF0xcxG4UBnQ=s4800-w800-h600',{r:4.4,n:284,pid:'ChIJRYC7MAAHbUcR6uvDaFbz9rA',q:'Wiener Christkindlmarkt Rathausplatz'}],
  ['הגלגל הענק - גלגל היסטורי','vie',48.2166995,16.3959008,'גלגל עץ מ-1897 בפראטר. לעלות בדמדומים, בערך ב-16:00.','https://lh3.googleusercontent.com/place-photos/AG9NLjDbL879lUE4i-fMO6V3gpNccQEuzAcIQkaKmhIBignyZf1V3ZReDdSEB65Uf0V7WgzRPdWGZbIF59CHLdXamPZdcSi1eS4kgh9rfjmIUGiphJsC8h-QAxH0XjZ1gYO06dL-hZVp7ZKXRVbR_tvN-at4=s4800-w800-h600',{r:4.5,n:49967,pid:'ChIJJYWNjA8HbUcRBlfleWeh1qw',q:'Wiener Riesenrad'}],
- ['שוק החורף בפראטר - פונש ואוכל','nightv',48.21721,16.39563,'פונש ואוכל רחוב מתחת לגלגל.','https://lh3.googleusercontent.com/place-photos/AG9NLjCDFQs5awxRFDvYx-hHaSm_tKTnuLdld4OgJvfvRkrfzI9FKcm45R2PBjlCQxFCioF9RzZbA7UZ6haMiWWNpZU802lT5P_Bsk4uBmXWpHK8TV_VPmnKJmmYlHnzVzCRYnczr7ROElmOOqhZ1lKhnHAz5g=s4800-w800-h600',{r:5.0,n:2,pid:'ChIJm6ZYs-MHbUcR-yT_8hEZeN8',q:'Wintermarkt am Riesenradplatz'}],
+ ['שוק החורף בפראטר - פונש ואוכל','night',48.21721,16.39563,'פונש ואוכל רחוב מתחת לגלגל.','https://lh3.googleusercontent.com/place-photos/AG9NLjCDFQs5awxRFDvYx-hHaSm_tKTnuLdld4OgJvfvRkrfzI9FKcm45R2PBjlCQxFCioF9RzZbA7UZ6haMiWWNpZU802lT5P_Bsk4uBmXWpHK8TV_VPmnKJmmYlHnzVzCRYnczr7ROElmOOqhZ1lKhnHAz5g=s4800-w800-h600',{r:5.0,n:2,pid:'ChIJm6ZYs-MHbUcR-yT_8hEZeN8',q:'Wintermarkt am Riesenradplatz'}],
  ['קאלנברג - תצפית וכרמים','nat',48.2742256,16.3382404,'תצפית על כל וינה, וירידה ברגל בין הכרמים לנוסדורף.','https://lh3.googleusercontent.com/grass-cs/ACvplmOZG_t2kIP4xg0ppWfk2jxvmofMVosvIAVAOM0tiNIMcaNRjQfbVDWdtHs48jqOEL_7cW0NEaPtIbM5gpcc1yVp-g3Wqr51_rJmQ1dnPha8hWNGOEXT84pXKI5fqbvvAXHSFjkPK-JTS6o=s4800-w800-h600',{r:5.0,n:11,pid:'ChIJF3Z6GAAJbUcRHysn6sRA9jE',q:'Kahlenberg Viewpoint'}],
- ['מאייר אם פפרפלאץ - יקב ומסעדה','nightv',48.2550739,16.3588896,'ויריגר, יקב בתוך העיר עם יין הבית ואוכל כבד. להזמין מקום.','https://lh3.googleusercontent.com/grass-cs/AABkmLcW-1ocMPK9dNxsWltcR9bunEXI9OxhB4L4KEwut1PGvp24ZL2bZhD7uvua1ZvEAREgHj0NHdlTvM6EHvZOy9kKUzd2-eTC4jubXMH0LY4V4DREaMHEqaOwgfXFI5UTC8YH5dy1DcanxraR=s4800-w800-h600',{r:4.3,n:1721,pid:'ChIJd4EG-hgGbUcRZemvOwfpNGU',q:'Mayer am Pfarrplatz'}],
+ ['מאייר אם פפרפלאץ - יקב ומסעדה','night',48.2550739,16.3588896,'ויריגר, יקב בתוך העיר עם יין הבית ואוכל כבד. להזמין מקום.','https://lh3.googleusercontent.com/grass-cs/AABkmLcW-1ocMPK9dNxsWltcR9bunEXI9OxhB4L4KEwut1PGvp24ZL2bZhD7uvua1ZvEAREgHj0NHdlTvM6EHvZOy9kKUzd2-eTC4jubXMH0LY4V4DREaMHEqaOwgfXFI5UTC8YH5dy1DcanxraR=s4800-w800-h600',{r:4.3,n:1721,pid:'ChIJd4EG-hgGbUcRZemvOwfpNGU',q:'Mayer am Pfarrplatz'}],
  ['Loft Hotel Bratislava - מלון','air',48.1519321,17.107188,'המלון בברטיסלבה, 17 עד 20.11. עשר דקות הליכה מהתחנה המרכזית ומהעיר העתיקה.','https://lh3.googleusercontent.com/grass-cs/ACvplmP0uA5Za5RJ293IGAW8yH9yYBdYcJHHVNKpHKy7FG4aknkliALM3Ye8Cr88oOe7k-a2dNQmbPC6F3RYSLM0BjwW62rsqWzJ_WWa7lH0YSJaCchnJsUB3c6uD3hg9ad9J4Wx_TN2-g=s4800-w800-h600',{r:4.7,n:1410,pid:'ChIJC4TRo1CJbEcRDJ1qJRu9pI4',q:'Loft Hotel Bratislava'}],
  ['The Social Hub Vienna - מלון','air',48.2228617,16.3900071,'המלון בווינה, 20 עד 22.11. ליד Praterstern, קו U1 ישיר למרכז ולתחנה המרכזית.','https://lh3.googleusercontent.com/place-photos/AG9NLjCQl8W90rfZ4-xfnbe8OCoDaAUzg-XdZ-D41oFlYAnTmPhKfqkNHipbose94Izc9nqfjEQtvDnLGDy6SdV2r2lBE_hqs9mSFTRBOpUBtInq-_Fh6PSmD4FItQokdX-62p5ckb4VfkTpiSQ0O3M=s4800-w800-h600',{r:4.3,n:2284,pid:'ChIJHXtJgxoHbUcRihQSjXwfXOA',q:'The Social Hub Vienna'}],
  ['בית חב"ד ברטיסלבה','kosher',48.1470875,17.1078553,'Chabad of Slovakia, Drevená 4. זו לא מסעדה: קייטרינג וארוחות שבת בהזמנה מראש בלבד, בהשגחת הרב ברוך מאיירס. בברטיסלבה אין כרגע מסעדה כשרה פתוחה לקהל. טלפון: +421-905-964-155.','https://lh3.googleusercontent.com/grass-cs/ACvplmNvcXHMJGAIdeSdt01OJdynEott3UQmLoI4NLNGHr_PhbJG12CzKGFlx1XviFTqF_19LrLWL8vTbYXMbZUx5czI8YDpndqkQ0wame1QgxkDNXkzvfEbFtJQeY2uOd0O0koSnY4g=s4800-w800-h600',{r:4.8,n:112,pid:'ChIJQchyTVmJbEcR9YKnNDrlqu0',q:'Chabad of Slovakia- Bratislava'}],
@@ -876,27 +867,17 @@ var BLANK='data:image/gif;base64,R0lGODlhAQABAIAAAOjk3AAAACH5BAAAAAAALAAAAAABAAE
 var EmbeddedTiles = L.TileLayer.extend({ getTileUrl: function(c){ var k=c.z+'/'+c.x+'/'+c.y; return T[k] ? 'data:image/png;base64,'+T[k] : BLANK; } });
 var map = L.map('map', { minZoom: 8, maxZoom: 18, zoomControl: true, maxBounds: [[47.8,15.7],[48.6,17.5]] });
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', { maxNativeZoom: 19, maxZoom: 19, minZoom: 8, attribution: 'Tiles &copy; Esri' }).addTo(map);
-var MK=[];
 points.forEach(function(p){
   var name=p[0], color=CAT[p[1]], lat=p[2], lon=p[3], desc=p[4], img=p[5], g=p[6];
   var icon = L.divIcon({ className:'pm', html:'<div class="wrap"><span class="dot" style="background:'+color+'"></span><span class="lbl">'+name+'</span></div>', iconSize:null, iconAnchor:[7,9] });
   var html = (img ? '<img src="'+img+'" loading="lazy" onerror="this.style.display=\'none\'">' : '') +
     '<div class="pb"><h4>'+name+'</h4>'+(g&&g.r?'<p class="rt">&#11088; '+g.r+' בגוגל ('+g.n.toLocaleString('en-US')+' מדרגים)</p>':'')+'<p>'+desc+'</p><a href="'+(g?'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(g.q)+'&destination_place_id='+g.pid:'https://www.google.com/maps/search/?api=1&query='+lat+','+lon)+'" target="_blank" rel="noopener">ניווט בגוגל מפות</a>'+(g?'<br><a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(g.q)+'&query_place_id='+g.pid+'" target="_blank" rel="noopener">כרטיס בגוגל: תפריט, ביקורות ותמונות</a>':'')+'</div>';
-  var mk=L.marker([lat,lon],{icon:icon}).addTo(map).bindPopup(html,{maxWidth:260,minWidth:260}); mk._cat=p[1]; MK.push(mk);
+  L.marker([lat,lon],{icon:icon}).addTo(map).bindPopup(html,{maxWidth:260,minWidth:260});
 });
 var VIEWS = { bra:[[48.135,17.095],[48.19,17.215]], devin:[[48.14,16.95],[48.21,17.09]], vie:[[48.19,16.33],[48.28,16.42]], all:[[48.13,16.33],[48.28,17.215]] };
 function showView(k){ map.fitBounds(VIEWS[k],{padding:[20,20]}); document.querySelectorAll('.views button').forEach(function(b){ b.classList.toggle('on', b.dataset.v===k); }); }
 document.querySelectorAll('.views button').forEach(function(b){ b.addEventListener('click', function(){ map.closePopup(); showView(b.dataset.v); }); });
 showView('bra');
-
-function filterCat(cat){
-  map.closePopup();
-  var shown=[];
-  MK.forEach(function(m){ var ok=(cat==='all'||m._cat===cat); if(ok){ if(!map.hasLayer(m)) m.addTo(map); shown.push(m.getLatLng()); } else if(map.hasLayer(m)) map.removeLayer(m); });
-  document.querySelectorAll('.legend span').forEach(function(s){ s.classList.toggle('on', s.dataset.cat===cat); });
-  if(cat==='all'){ showView('all'); } else if(shown.length){ map.fitBounds(L.latLngBounds(shown),{padding:[40,40],maxZoom:15}); }
-}
-document.querySelectorAll('.legend span').forEach(function(s){ s.addEventListener('click', function(){ filterCat(s.dataset.cat); }); });
 </script>
 <script data-goatcounter="https://ronen2000.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
