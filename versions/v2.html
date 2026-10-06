@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>קפה אורן | רמת גן | קטלוג</title>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f3f0;--ink:#16211b;--card:#fff;--line:#dfe4de;--acc:#0a7d4f;--muted:#5d6a62}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Assistant",Arial,sans-serif;font-variant-numeric:tabular-nums;line-height:1.35}
+.bar{position:sticky;top:0;z-index:5;background:var(--ink);color:#fff;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;justify-content:space-between;padding:10px 16px;font-size:14px}
+.bar a{color:#9fe8c6;font-weight:600}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+h1{font-size:clamp(26px,5vw,40px);font-weight:800}
+.sub{color:var(--muted);margin:2px 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chips button{font:inherit;font-weight:600;border:1px solid var(--line);background:var(--card);padding:7px 14px;border-radius:8px;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--acc);color:#fff;border-color:var(--acc)}
+.chips button:focus-visible,.call:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.count{color:var(--muted);font-size:14px;margin-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.card[hidden]{display:none}
+.card .ic{font-size:26px}
+.card b{font-weight:800}
+.card small{color:var(--muted)}
+.price{margin-top:auto;font-weight:800;color:var(--acc);font-size:18px}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:20px}
+.info div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.info h2{font-size:14px;color:var(--muted);font-weight:600}
+.call{display:inline-block;margin-top:6px;background:var(--acc);color:#fff;text-decoration:none;font-weight:800;padding:8px 14px;border-radius:8px}
+</style>
+</head>
+<body>
+<div class="bar"><span>קפה אורן · ז׳בוטינסקי 52, רמת גן</span><span>א׳-ה׳ 07:00-19:00 · ו׳ 08:00-15:00 · <a href="tel:035550142">03-555-0142</a></span></div>
+<div class="wrap">
+  <h1>התפריט המלא, במבט אחד</h1>
+  <p class="sub">בחרו קטגוריה, תראו מחיר, ובואו.</p>
+  <div class="chips" role="group" aria-label="סינון תפריט" id="chips">
+    <button aria-pressed="true" data-f="all">הכול</button>
+    <button aria-pressed="false" data-f="hot">חם</button>
+    <button aria-pressed="false" data-f="cold">קר</button>
+    <button aria-pressed="false" data-f="bake">מאפים</button>
+    <button aria-pressed="false" data-f="meal">ארוחות</button>
+  </div>
+  <p class="count" id="count" aria-live="polite"></p>
+  <div class="grid" id="grid"></div>
+  <div class="info">
+    <div><h2>כתובת</h2><b>ז׳בוטינסקי 52, רמת גן</b><br><small>5 דקות מהרכבת הקלה</small></div>
+    <div><h2>שעות</h2><b>א׳-ה׳ 07:00-19:00</b><br>ו׳ 08:00-15:00 · שבת סגור</div>
+    <div><h2>הזמנה מראש</h2><a class="call" href="tel:035550142">התקשרו 03-555-0142</a></div>
+  </div>
+</div>
+<script>
+var items=[
+["☕","אספרסו","כפול, פולי הבית",11,"hot"],["☕","הפוך","חלב מלא או שיבולת שועל",15,"hot"],["🍵","תה נענע טרייה","קנקן לאחד",14,"hot"],["🍫","שוקו חם","שוקולד בלגי",18,"hot"],
+["🧊","קולד ברו","24 שעות חליטה",18,"cold"],["🍋","לימונענע","גרניטה טבעית",16,"cold"],["🥤","אייס לאטה","אספרסו כפול",19,"cold"],["🍊","תפוזים סחוט","טרי",17,"cold"],
+["🥐","קרואסון חמאה","אפוי בבוקר",16,"bake"],["🍰","עוגת גבינה","אפויה, פירות יער",28,"bake"],["🍪","עוגיית שוקולד","ענקית",12,"bake"],["🥖","בורקס גבינה","בצק עלים",15,"bake"],
+["🍳","שקשוקה","שתי ביצים, לחם",42,"meal"],["🥪","טוסט גבינות","שלוש גבינות, סלט",34,"meal"],["🥗","סלט ירוק","טחינה ולימון",38,"meal"],["🥚","ארוחת בוקר","ביצים, סלט, גבינות, שתייה",56,"meal"]];
+var grid=document.getElementById('grid'),count=document.getElementById('count');
+items.forEach(function(i){var c=document.createElement('article');c.className='card';c.dataset.c=i[4];
+c.innerHTML='<span class="ic" aria-hidden="true">'+i[0]+'</span><b>'+i[1]+'</b><small>'+i[2]+'</small><span class="price">'+i[3]+' ₪</span>';grid.appendChild(c)});
+function apply(f){var n=0;grid.querySelectorAll('.card').forEach(function(c){var show=f==='all'||c.dataset.c===f;c.hidden=!show;if(show)n++});count.textContent=n+' מנות';}
+document.getElementById('chips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+this.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});apply(b.dataset.f)});
+apply('all');
+</script>
+</body>
+</html>

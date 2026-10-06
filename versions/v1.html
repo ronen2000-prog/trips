@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>קפה אורן | רמת גן | פוסטר</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Heebo:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1d3bd8;--yellow:#ffe24a}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--blue);color:var(--yellow);font-family:"Heebo",Arial,sans-serif;overflow-x:hidden}
+main{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;padding:clamp(16px,3vw,40px)}
+header{display:flex;justify-content:space-between;align-items:center;font-weight:700;letter-spacing:.02em}
+header span:last-child{border:2px solid var(--yellow);border-radius:99px;padding:4px 14px}
+.hero{display:flex;flex-direction:column;justify-content:center;gap:0}
+.clock{font-family:"Secular One","Arial Black",sans-serif;font-size:clamp(110px,34vw,420px);line-height:.85;direction:ltr;text-align:center;font-variant-numeric:tabular-nums}
+h1{font-family:"Secular One","Arial Black",sans-serif;font-size:clamp(34px,8vw,96px);line-height:1;text-align:center;margin-top:.2em}
+h1 em{font-style:normal;background:var(--yellow);color:var(--blue);padding:0 .25em;border-radius:.15em}
+.nw{white-space:nowrap}
+.cap{text-align:center;font-weight:700;font-size:clamp(16px,2.4vw,24px);margin-top:.6em}
+footer{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center;font-size:clamp(15px,2vw,20px);font-weight:500}
+.cta{background:var(--yellow);color:var(--blue);font-family:"Secular One",Arial,sans-serif;font-size:clamp(20px,3vw,30px);padding:14px 28px;border-radius:99px;text-decoration:none;transition:transform .15s}
+.cta:hover{transform:rotate(-2deg) scale(1.04)}
+.cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media (max-width:560px){footer{flex-direction:column;align-items:stretch;text-align:center}.cta{text-align:center}}
+@media (prefers-reduced-motion:reduce){.cta{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <header><span>קפה אורן · רמת גן</span><span>פתוח עכשיו? <b id="st">בדקו למטה</b></span></header>
+  <section class="hero">
+    <div class="clock" id="clock" aria-label="07:00">07:00</div>
+    <p class="cap">פותחים כל בוקר ב-07:00</p>
+    <h1>הקפה הראשון <em>שלכם</em> ברמת גן</h1>
+  </section>
+  <footer>
+    <div>ז׳בוטינסקי 52, רמת גן · <span class="nw">א׳-ה׳ 07:00-19:00</span> · <span class="nw">ו׳ 08:00-15:00</span></div>
+    <a class="cta" href="tel:035550142">בואו לשתות · 03-555-0142</a>
+  </footer>
+</main>
+<script>
+(function(){
+  var el=document.getElementById('clock'),end=420,t0=null;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
+  function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/1600,1),e=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(end*e));if(p<1)requestAnimationFrame(step);else el.textContent='07:00'}
+  if(!reduce){el.textContent='00:00';requestAnimationFrame(step)}
+  var f=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Jerusalem',weekday:'short',hour:'numeric',minute:'numeric',hourCycle:'h23'}).formatToParts(new Date()),g={};
+  f.forEach(function(x){g[x.type]=x.value});
+  var h=+g.hour+(+g.minute)/60,w={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[g.weekday];
+  var open=w===6?false:w===5?(h>=8&&h<15):(h>=7&&h<19);
+  document.getElementById('st').textContent=open?'כן, בואו':'כרגע סגור';
+})();
+</script>
+</body>
+</html>

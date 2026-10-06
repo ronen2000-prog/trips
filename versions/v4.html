@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>קפה אורן | רמת גן | יום בקפה</title>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--p:0;--ink:#2b2340}
+*{box-sizing:border-box;margin:0}
+body{font-family:"Varela Round","Rubik",Arial,sans-serif;color:var(--ink);line-height:1.55;
+background:linear-gradient(180deg,#ffd6c9 0%,#bfe3f5 28%,#ffe9a8 58%,#c8b6f0 82%,#6f5fb0 100%);background-attachment:scroll}
+.w{max-width:720px;margin:0 auto;padding:0 20px;position:relative}
+.rail{position:fixed;inset-block:0;inset-inline-start:14px;width:4px;background:rgba(43,35,64,.15);border-radius:4px;z-index:3}
+.rail i{position:absolute;top:0;inset-inline:0;height:calc(var(--p)*100%);background:var(--ink);border-radius:4px}
+section{min-height:78svh;display:flex;flex-direction:column;justify-content:center;padding:56px 0 56px 0;padding-inline-start:30px}
+.time{font-family:"Rubik",Arial,sans-serif;font-weight:600;font-size:15px;letter-spacing:.08em;background:var(--ink);color:#fff;display:inline-block;width:max-content;padding:4px 12px;border-radius:99px;margin-bottom:12px;direction:ltr}
+h1,h2{font-size:clamp(32px,7vw,56px);line-height:1.1;margin-bottom:12px}
+p{font-size:18px;max-width:34em}
+.dish{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.dish span{background:rgba(255,255,255,.7);border-radius:99px;padding:6px 14px;font-size:16px}
+.cta{display:inline-block;margin-top:18px;width:max-content;background:#fff;color:var(--ink);padding:14px 26px;border-radius:99px;text-decoration:none;font-weight:600;box-shadow:0 6px 0 rgba(43,35,64,.25)}
+.cta:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.last{color:#fff}.last .time{background:#fff;color:var(--ink)}
+.sun{position:fixed;inset-inline-end:7%;top:calc(8% + var(--p)*60%);width:clamp(50px,9vw,90px);aspect-ratio:1;border-radius:50%;background:#ffb300;box-shadow:0 0 60px 20px rgba(255,179,0,.4);opacity:calc(1 - var(--p)*.8);z-index:0;pointer-events:none}
+section{position:relative;z-index:1}
+</style>
+</head>
+<body>
+<div class="rail" aria-hidden="true"><i></i></div>
+<div class="sun" aria-hidden="true"></div>
+<div class="w">
+  <section>
+    <span class="time">07:00</span>
+    <h1>מתחילים את היום בקפה</h1>
+    <p>קפה אורן ברמת גן נפתח כשהרחוב עוד מתעורר. הקרואסונים יוצאים מהתנור, והמכונה כבר חמה.</p>
+    <div class="dish"><span>אספרסו 11 ₪</span><span>קרואסון חמאה 16 ₪</span></div>
+  </section>
+  <section>
+    <span class="time">11:00</span>
+    <h2>ארוחת בוקר שמתארכת</h2>
+    <p>שקשוקה, טוסט גבינות וסלט ירוק. שולחן ליד החלון, וקפה שאף אחד לא ממהר לקחת מכם.</p>
+    <div class="dish"><span>שקשוקה 42 ₪</span><span>טוסט גבינות 34 ₪</span><span>ארוחת בוקר 56 ₪</span></div>
+  </section>
+  <section>
+    <span class="time">15:00</span>
+    <h2>הפסקה של אחר הצהריים</h2>
+    <p>קולד ברו קר, עוגת גבינה אפויה, ועשר דקות בלי מסך.</p>
+    <div class="dish"><span>קולד ברו 18 ₪</span><span>עוגת גבינה 28 ₪</span><span>לימונענע 16 ₪</span></div>
+  </section>
+  <section class="last">
+    <span class="time">19:00</span>
+    <h2>נסגרים. מחר חוזרים.</h2>
+    <p>ז׳בוטינסקי 52, רמת גן. א׳-ה׳ 07:00-19:00, ו׳ 08:00-15:00, שבת סגור.</p>
+    <a class="cta" href="tel:035550142">התקשרו 03-555-0142</a>
+  </section>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function upd(){var max=document.documentElement.scrollHeight-innerHeight;root.style.setProperty('--p',max>0?Math.min(scrollY/max,1).toFixed(3):0)}
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+})();
+</script>
+</body>
+</html>

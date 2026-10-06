@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>קפה אורן | רמת גן | אנושי ומקומי</title>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;800&family=Playpen+Sans+Hebrew:wght@400;700&family=Heebo:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--sage:#dbe5cf;--forest:#1f3a2c;--lilac:#b9a3dc;--sun:#f4d35e;--paper:#f7fbf2}
+*{box-sizing:border-box;margin:0}
+body{background:var(--sage);color:var(--forest);font-family:"Heebo",Arial,sans-serif;line-height:1.6}
+.w{max-width:960px;margin:0 auto;padding:28px 18px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:800;font-size:24px}
+.hand{font-family:"Playpen Sans Hebrew","Comic Sans MS",cursive;color:#6a4cb0}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;margin:28px 0 40px}
+h1{font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:800;font-size:clamp(34px,6vw,64px);line-height:1.08}
+.hero p{margin:14px 0 20px;font-size:18px}
+.btn{display:inline-block;background:var(--forest);color:var(--paper);padding:13px 24px;border-radius:99px;text-decoration:none;font-weight:500}
+.btn:focus-visible{outline:3px solid var(--lilac);outline-offset:3px}
+.face{aspect-ratio:1;border-radius:46% 54% 50% 50%/55% 45% 55% 45%;background:var(--lilac);display:grid;place-items:center;text-align:center;padding:24px;transform:rotate(-3deg)}
+.face span{font-family:"Playpen Sans Hebrew","Comic Sans MS",cursive;font-size:clamp(18px,3vw,26px);font-weight:700;color:var(--forest)}
+.note{background:var(--sun);padding:16px 18px;border-radius:6px;transform:rotate(1.5deg);max-width:340px;margin:0 0 36px;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+h2{font-family:"Frank Ruhl Libre",Georgia,serif;font-size:30px;margin-bottom:14px}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:40px}
+.q{background:var(--paper);border-radius:14px;padding:18px}
+.q p{margin-bottom:12px}
+.who{display:flex;align-items:center;gap:10px;font-weight:500}
+.av{width:38px;height:38px;border-radius:50%;background:var(--lilac);display:grid;place-items:center;font-weight:700}
+.visit{background:var(--forest);color:var(--paper);border-radius:18px;padding:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.visit a{color:var(--sun)}
+.visit h3{font-family:"Frank Ruhl Libre",Georgia,serif;font-size:20px;margin-bottom:4px}
+@media (max-width:640px){.hero{grid-template-columns:1fr}.face{max-width:260px;margin:0 auto}}
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="top"><span class="logo">קפה אורן</span><span class="hand">ז׳בוטינסקי 52, רמת גן</span></div>
+  <section class="hero">
+    <div>
+      <h1>הקפה של השכונה, עם שם ופנים</h1>
+      <p>דנה ויואב עומדים מאחורי הדלפק כל בוקר. אנחנו זוכרים איך אתם שותים, ואת שם הכלב שלכם. בואו להיכנס.</p>
+      <a class="btn" href="tel:035550142">שמרו לנו שולחן · 03-555-0142</a>
+    </div>
+    <div class="face" role="img" aria-label="דנה ויואב, הבעלים"><span>דנה ויואב<br>הבעלים</span></div>
+  </section>
+  <div class="note hand">כלבים תמיד מוזמנים. יש קערת מים בכניסה 🐕</div>
+  <h2>מה אומרים עלינו</h2>
+  <div class="quotes">
+    <div class="q"><p>״ההפוך הכי טוב ברמת גן, והקרואסון עדיין חם כשמגיעים בשמונה.״</p><div class="who"><span class="av">מ</span>מיכל, גרה ברחוב</div></div>
+    <div class="q"><p>״עובד פה פעמיים בשבוע עם הלפטופ. אף פעם לא ביקשו ממני לזוז.״</p><div class="who"><span class="av">ע</span>עידו, פרילנסר</div></div>
+    <div class="q"><p>״הבאתי את הכלב, קיבל עוגיית כלבים וקערת מים. סגרנו.״</p><div class="who"><span class="av">ת</span>תמר ובובי</div></div>
+  </div>
+  <section class="visit" aria-label="איך מגיעים">
+    <div><h3>כתובת</h3>ז׳בוטינסקי 52, רמת גן<br>5 דקות מהרכבת הקלה</div>
+    <div><h3>שעות</h3>א׳-ה׳ 07:00-19:00<br>ו׳ 08:00-15:00 · שבת סגור</div>
+    <div><h3>דברו איתנו</h3><a href="tel:035550142">03-555-0142</a></div>
+  </section>
+</div>
+</body>
+</html>

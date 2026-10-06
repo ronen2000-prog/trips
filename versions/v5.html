@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>קפה אורן | רמת גן | הזמנה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e6eef3;--ink:#12303f;--card:#fff;--line:#cbd9e1;--acc:#1b6f8f}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Heebo",Arial,sans-serif;line-height:1.4}
+.w{max-width:880px;margin:0 auto;padding:20px 16px}
+h1{font-size:clamp(26px,5vw,38px);font-weight:800}
+.sub{margin:4px 0 18px}
+.layout{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+fieldset{border:0;padding:0;margin:0 0 14px}
+legend{font-weight:600;margin-bottom:6px;font-size:14px;color:#4b6a7a}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts label{border:1px solid var(--line);border-radius:8px;padding:8px 13px;cursor:pointer;background:#f7fafc}
+.opts input:checked+label{background:var(--acc);border-color:var(--acc);color:#fff}
+.opts input:focus-visible+label{outline:3px solid #0a3a4f;outline-offset:2px}
+select{font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px;background:#f7fafc}
+.mono{font-family:"IBM Plex Mono",Consolas,monospace;direction:ltr;unicode-bidi:isolate}
+.rcpt{position:sticky;top:12px}
+.rcpt h2{font-size:14px;color:#4b6a7a;margin-bottom:8px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.total{font-size:32px;font-weight:600;margin:12px 0}
+.go{display:block;text-align:center;background:var(--acc);color:#fff;font-weight:800;text-decoration:none;padding:13px;border-radius:10px}
+.go:focus-visible{outline:3px solid #0a3a4f;outline-offset:3px}
+.foot{margin-top:14px;font-size:14px;color:#4b6a7a}
+@media (max-width:680px){.layout{grid-template-columns:1fr}.rcpt{position:static}}
+</style>
+</head>
+<body>
+<div class="w">
+  <h1>הזמינו מראש, קחו ואל תחכו</h1>
+  <p class="sub">קפה אורן, ז׳בוטינסקי 52, רמת גן. בחרו, ראו מחיר, ושלחו בוואטסאפ.</p>
+  <div class="layout">
+    <form class="panel" id="f" onsubmit="return false">
+      <fieldset><legend>משקה</legend><div class="opts" id="drink"></div></fieldset>
+      <fieldset><legend>גודל</legend><div class="opts" id="size"></div></fieldset>
+      <fieldset><legend>חלב</legend><div class="opts" id="milk"></div></fieldset>
+      <fieldset><legend>תוספת מאפה</legend><div class="opts" id="bake"></div></fieldset>
+      <fieldset><legend><label for="when">שעת איסוף</label></legend><select id="when"></select></fieldset>
+    </form>
+    <aside class="panel rcpt" aria-live="polite">
+      <h2>ההזמנה שלכם</h2>
+      <div id="lines"></div>
+      <div class="total mono" id="total">0 ₪</div>
+      <a class="go" id="go" href="#" target="_blank" rel="noopener">שלחו בוואטסאפ</a>
+      <p class="foot">או התקשרו: <a class="mono" href="tel:035550142">03-555-0142</a></p>
+    </aside>
+  </div>
+  <p class="foot">א׳-ה׳ 07:00-19:00 · ו׳ 08:00-15:00 · שבת סגור. מחירים לדוגמה.</p>
+</div>
+<script>
+var D=[["אספרסו",11],["הפוך",15],["קולד ברו",18],["אייס לאטה",19],["שוקו חם",18]],
+S=[["קטן",0],["בינוני",3],["גדול",6]],
+M=[["חלב מלא",0],["שיבולת שועל",3],["סויה",3]],
+B=[["בלי",0],["קרואסון חמאה",16],["עוגיית שוקולד",12],["עוגת גבינה",28]];
+function mk(id,arr,def){var el=document.getElementById(id);arr.forEach(function(a,i){
+var x=document.createElement('input');x.type='radio';x.name=id;x.id=id+i;x.value=i;if(i===def)x.checked=true;
+var l=document.createElement('label');l.htmlFor=x.id;l.textContent=a[0]+(a[1]?' (+'+a[1]+')':'');
+el.appendChild(x);el.appendChild(l);x.addEventListener('change',calc)})}
+mk('drink',D,1);mk('size',S,1);mk('milk',M,0);mk('bake',B,0);
+var w=document.getElementById('when');
+['כמה שיותר מהר','08:00','09:00','10:00','12:00','14:00','16:00','18:00'].forEach(function(t){var o=document.createElement('option');o.textContent=t;w.appendChild(o)});
+w.addEventListener('change',calc);
+function v(id,arr){var r=document.querySelector('input[name='+id+']:checked');return arr[+r.value]}
+function calc(){
+  var d=v('drink',D),s=v('size',S),m=v('milk',M),b=v('bake',B);
+  var items=[[d[0]+' '+s[0],d[1]+s[1]],[m[0],m[1]]];if(b[1])items.push([b[0],b[1]]);
+  var total=items.reduce(function(a,i){return a+i[1]},0);
+  document.getElementById('lines').innerHTML=items.map(function(i){return '<div class="row"><span>'+i[0]+'</span><span class="mono">'+i[1]+' ₪</span></div>'}).join('');
+  document.getElementById('total').textContent=total+' ₪';
+  var txt='שלום, אני רוצה להזמין: '+items.map(function(i){return i[0]}).join(', ')+'. איסוף: '+w.value+'. סה״כ '+total+' ₪';
+  document.getElementById('go').href='https://wa.me/97235550142?text='+encodeURIComponent(txt);
+}
+calc();
+</script>
+</body>
+</html>
