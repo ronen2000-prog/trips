@@ -885,7 +885,7 @@ points.forEach(function(p){
     '<div class="pb"><h4>'+name+'</h4>'+(g&&g.r?'<p class="rt">&#11088; '+g.r+' בגוגל ('+g.n.toLocaleString('en-US')+' מדרגים)</p>':'')+'<p>'+desc+'</p><a href="'+(g?'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(g.q)+'&destination_place_id='+g.pid:'https://www.google.com/maps/search/?api=1&query='+lat+','+lon)+'" target="_blank" rel="noopener">ניווט בגוגל מפות</a>'+(g?'<br><a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(g.q)+'&query_place_id='+g.pid+'" target="_blank" rel="noopener">כרטיס בגוגל: תפריט, ביקורות ותמונות</a>':'')+'</div>';
   MK.push({m:L.marker([lat,lon],{icon:icon}).addTo(map).bindPopup(html,{maxWidth:260,minWidth:260}),cat:p[1]});
 });
-var VIEWS = { bra:[[48.135,17.095],[48.19,17.215]], devin:[[48.14,16.95],[48.21,17.09]], vie:[[48.19,16.33],[48.28,16.42]], all:[[48.13,16.33],[48.28,17.215]] };
+var VIEWS = { bra:[[48.128,17.095],[48.19,17.215]], devin:[[48.14,16.95],[48.21,17.09]], vie:[[48.19,16.33],[48.28,16.42]], all:[[48.125,16.33],[48.28,17.215]] };
 function showView(k){ map.fitBounds(VIEWS[k],{padding:[20,20]}); document.querySelectorAll('.views button').forEach(function(b){ b.classList.toggle('on', b.dataset.v===k); }); }
 document.querySelectorAll('.views button').forEach(function(b){ b.addEventListener('click', function(){ map.closePopup(); showView(b.dataset.v); }); });
 showView('bra');
