@@ -686,6 +686,10 @@ h1{margin:0 0 4px;font-size:21px}
 .views button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 #map{direction:ltr;height:70vh;min-height:420px;max-width:1100px;margin:0 auto;border-radius:12px;border:1px solid var(--line);background:#e8e4dc}
 @media (max-width:700px){#map{height:72vh;border-radius:0;border-left:0;border-right:0}}
+#map.fs{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-width:none!important;min-height:0!important;margin:0!important;border-radius:0!important;border:0!important;z-index:9999}
+body.fs-on{overflow:hidden}
+.fs-btn a{font-size:18px;line-height:30px;font-weight:700;cursor:pointer;text-decoration:none}
+
 main{max-width:1100px;margin:0 auto;padding:12px 16px 40px}
 .day{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}
 .day h3{margin:0 0 6px;font-size:16px;color:var(--accent)}
@@ -890,6 +894,21 @@ var VIEWS = { bra:[[48.128,17.095],[48.19,17.215]], devin:[[48.14,16.95],[48.21,
 function showView(k){ map.fitBounds(VIEWS[k],{padding:[20,20]}); document.querySelectorAll('.views button').forEach(function(b){ b.classList.toggle('on', b.dataset.v===k); }); }
 document.querySelectorAll('.views button').forEach(function(b){ b.addEventListener('click', function(){ map.closePopup(); showView(b.dataset.v); }); });
 showView('bra');
+
+(function(){
+  var C=L.Control.extend({options:{position:'topleft'},onAdd:function(){
+    var d=L.DomUtil.create('div','leaflet-bar fs-btn'), a=L.DomUtil.create('a','',d);
+    a.href='#'; a.title='מסך מלא'; a.setAttribute('role','button'); a.innerHTML='&#x26F6;';
+    L.DomEvent.disableClickPropagation(d);
+    function set(on){ var m=document.getElementById('map'); var c=map.getCenter(), z=map.getZoom();
+      m.classList.toggle('fs',on); document.body.classList.toggle('fs-on',on);
+      a.innerHTML=on?'&#x2715;':'&#x26F6;'; a.title=on?'יציאה ממסך מלא':'מסך מלא';
+      setTimeout(function(){ map.invalidateSize(); map.setView(c,z,{animate:false}); },60); }
+    L.DomEvent.on(a,'click',function(e){ L.DomEvent.preventDefault(e); set(!document.getElementById('map').classList.contains('fs')); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&document.getElementById('map').classList.contains('fs')) set(false); });
+    return d; }});
+  map.addControl(new C());
+})();
 
 document.querySelectorAll('.lg[data-cat]').forEach(function(b){b.addEventListener('click',function(){
   b.classList.toggle('on'); var on=b.classList.contains('on'), c=b.getAttribute('data-cat');
