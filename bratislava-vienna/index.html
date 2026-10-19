@@ -665,6 +665,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
 		print-color-adjust: exact;
 		}
 	}
+#map{height:calc(100vh - 230px)!important;height:calc(100dvh - 230px)!important;min-height:380px!important}
+@media (max-width:700px){#map{height:calc(100dvh - 260px)!important}}
 </style>
 <style>
 :root{--bg:#f6f7f9;--surface:#ffffff;--ink:#1f2937;--muted:#6b7280;--line:#e5e7eb;--accent:#0f766e}
@@ -733,7 +735,7 @@ main{max-width:1100px;margin:0 auto;padding:12px 16px 40px}
   <button data-v="all">הכל</button>
 </div>
 <div id="map"></div>
-<main>
+<main style="display:none">
   <div class="day"><h3>ניווט בגוגל מפות, יום אחרי יום (הקלק לקבלת המסלול היומי)</h3><ul>
     <li><a href="https://www.google.com/maps/dir/?api=1&amp;origin=48.1519321%2C17.107188&amp;destination=48.1519321%2C17.107188&amp;travelmode=walking&amp;waypoints=48.1536106%2C17.114208%7C48.1451796%2C17.1067313%7C48.1436775%2C17.1083432%7C48.1428677%2C17.1088427%7C48.1434028%2C17.1169342%7C48.1420299%2C17.1047674%7C48.1421086%2C17.1002348%7C48.1826322%2C17.0949707%7C48.1448741%2C17.1061875" target="_blank" rel="noopener">רביעי 18.11: ברטיסלבה העתיקה</a></li>
     <li><a href="https://www.google.com/maps/dir/?api=1&amp;origin=48.1519321%2C17.107188&amp;destination=48.1519321%2C17.107188&amp;travelmode=walking&amp;waypoints=48.1738903%2C16.9781172%7C48.189319%2C16.9955469%7C48.2006877%2C16.9745941%7C48.1447957%2C17.106851%7C48.1367753%2C17.1048432" target="_blank" rel="noopener">חמישי 19.11: דווין וקוביילה</a></li>
