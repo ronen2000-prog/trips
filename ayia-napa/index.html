@@ -53,8 +53,8 @@ ul{padding-inline-start:20px;font-size:13.5px;line-height:1.6}
 .note{color:var(--muted);font-size:12.5px}
 </style></head><body>
 <header><h1>איה נאפה: חופים, אטרקציות, שייט, מסעדות ובתי קפה</h1>
-<p>53 נקודות מאומתות. לחיצה על נקודה פותחת תמונה, תיאור ומקור. לחיצה על קטגוריה במקרא מציגה רק אותה, לחיצות נוספות מוסיפות או מורידות קטגוריות, "הכל" מחזיר הכל. המלון מסומן בצהוב ומוצג תמיד.</p></header>
-<div class="legend"><button class="lg all" id="showAll">הכל</button><button class="lg on" data-cat="beach"><span style="background:#0d9488"></span>חופים (13)</button><button class="lg on" data-cat="nature"><span style="background:#ea580c"></span>טבע ותצפיות (4)</button><button class="lg on" data-cat="attraction"><span style="background:#7c3aed"></span>אטרקציות ואתרים (7)</button><button class="lg on" data-cat="boat"><span style="background:#dc2626"></span>יציאות שייט (3)</button><button class="lg on" data-cat="food"><span style="background:#b45309"></span>מסעדות 4.2 ומעלה (16)</button><button class="lg on" data-cat="cafe"><span style="background:#db2777"></span>בתי קפה 4.2 ומעלה (9)</button><button class="lg tq" id="tqOnly"><span style="background:#14b8a6"></span>רק מים טורקיז</button></div>
+<p>53 נקודות מאומתות. לחיצה על נקודה פותחת תמונה, תיאור ומקור. לחיצה על קטגוריה במקרא מציגה רק אותה, לחיצות נוספות מוסיפות או מורידות קטגוריות, "הכל" מדליק הכל, ולחיצה נוספת מכבה הכל. המלון מסומן בצהוב ומוצג תמיד.</p></header>
+<div class="legend"><button class="lg all on" id="showAll">הכל</button><button class="lg on" data-cat="beach"><span style="background:#0d9488"></span>חופים (13)</button><button class="lg on" data-cat="nature"><span style="background:#ea580c"></span>טבע ותצפיות (4)</button><button class="lg on" data-cat="attraction"><span style="background:#7c3aed"></span>אטרקציות ואתרים (7)</button><button class="lg on" data-cat="boat"><span style="background:#dc2626"></span>יציאות שייט (3)</button><button class="lg on" data-cat="food"><span style="background:#b45309"></span>מסעדות 4.2 ומעלה (16)</button><button class="lg on" data-cat="cafe"><span style="background:#db2777"></span>בתי קפה 4.2 ומעלה (9)</button><button class="lg tq on" data-cat="tq"><span style="background:#14b8a6"></span>מים טורקיז (9)</button></div>
 <div id="map"></div>
 <main>
 <h2>סוגי שייט ומאיפה יוצאים</h2>
@@ -177,25 +177,27 @@ points.forEach(function(p){
     var was=activePopup&&activePopup._src===m; map.closePopup(); activePopup=null;
     if(was)return;
     var h=map.getContainer().clientHeight;
-    var pop=L.popup({closeButton:false,maxWidth:300,maxHeight:Math.max(200,h-90),autoPanPaddingTopLeft:[10,10],autoPanPaddingBottomRight:[10,10],offset:[0,-8]}).setLatLng([lat,lon]).setContent(html);
+    var pop=L.popup({closeButton:false,closeOnClick:false,autoClose:true,maxWidth:300,maxHeight:Math.max(200,h-90),autoPanPaddingTopLeft:[10,10],autoPanPaddingBottomRight:[10,10],offset:[0,-8]}).setLatLng([lat,lon]).setContent(html);
     pop._src=m; pop.openOn(map); activePopup=pop;
   });
   markers.push({m:m,cat:cat,tq:!!tq});
 });
 map.on('popupclose',function(){activePopup=null;});
+map.on('click',function(){map.closePopup();});
 function vis(x,on){if(on){if(!map.hasLayer(x.m))x.m.addTo(map);}else if(map.hasLayer(x.m)){map.removeLayer(x.m);}}
-var btns=[].slice.call(document.querySelectorAll('.lg[data-cat]')), tqOn=false;
+var btns=[].slice.call(document.querySelectorAll('.lg[data-cat]')), allBtn=document.getElementById('showAll');
+function isOn(c){return btns.some(function(b){return b.getAttribute('data-cat')===c&&b.classList.contains('on');});}
+function allOn(){return btns.every(function(b){return b.classList.contains('on');});}
 function apply(){
-  var on={}; btns.forEach(function(b){on[b.getAttribute('data-cat')]=b.classList.contains('on');});
   map.closePopup();
-  markers.forEach(function(x){ if(x.cat==='hotel'){vis(x,true);return;} vis(x, !!on[x.cat] && (!tqOn||x.tq)); });
+  markers.forEach(function(x){ vis(x, x.cat==='hotel' || isOn(x.cat) || (x.tq && isOn('tq'))); });
+  allBtn.classList.toggle('on', allOn());
 }
 btns.forEach(function(b){b.addEventListener('click',function(){
-  var allOn=btns.every(function(o){return o.classList.contains('on');});
-  if(allOn){ btns.forEach(function(o){o.classList.toggle('on',o===b);}); }
-  else { b.classList.toggle('on'); if(!btns.some(function(o){return o.classList.contains('on');})) btns.forEach(function(o){o.classList.add('on');}); }
+  if(allOn()){ btns.forEach(function(o){o.classList.toggle('on',o===b);}); }
+  else { b.classList.toggle('on'); }
   apply();
 });});
-document.getElementById('showAll').addEventListener('click',function(){ btns.forEach(function(o){o.classList.add('on');}); tqOn=false; document.getElementById('tqOnly').classList.remove('on'); apply(); });
-document.getElementById('tqOnly').addEventListener('click',function(){ tqOn=!tqOn; this.classList.toggle('on',tqOn); apply(); });
+allBtn.addEventListener('click',function(){ var t=!allOn(); btns.forEach(function(o){o.classList.toggle('on',t);}); apply(); });
+apply();
 </script></body></html>
