@@ -6,11 +6,12 @@
 <title>מסלול יום לפמגוסטה מאיה נאפה</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
-:root{--ink:#1f2937;--surface:#fff;--line:#d1d5db}
-body{margin:0;font-family:Calibri,'Segoe UI',Arial,sans-serif;color:var(--ink);background:#f3f4f6}
+:root{--ink:#1f2937;--surface:#fff;--line:#d1d5db;--bg:#f3f4f6}
+@media (prefers-color-scheme:dark){:root{--ink:#e5e7eb;--surface:#1f2937;--line:#374151;--bg:#111827}}
+body{margin:0;font-family:Calibri,'Segoe UI',Arial,sans-serif;color:var(--ink);background:var(--bg)}
 h1{font-size:18px;margin:10px 12px 4px}
 .legend{display:flex;gap:6px;flex-wrap:wrap;margin:0 12px 8px}
-.chip{display:flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid var(--line);border-radius:14px;background:#fff;font-size:12px;cursor:pointer;user-select:none}
+.chip{display:flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font-size:12px;cursor:pointer;user-select:none}
 .chip.off{opacity:.4}
 .chip i{width:11px;height:11px;border-radius:50%;display:inline-block}
 #map{height:80vh;min-height:460px;direction:ltr}
@@ -21,11 +22,18 @@ h1{font-size:18px;margin:10px 12px 4px}
 .leaflet-popup-content-wrapper{background:#fff!important;color:#1f2937!important;padding:0!important;border-radius:12px!important}
 .leaflet-popup-content{margin:0!important;width:280px;max-width:78vw;direction:rtl;text-align:right}
 .leaflet-popup-tip{background:#fff!important}
+.leaflet-popup-content img.thumb{display:block;width:100%;height:120px;object-fit:cover;background:#e5e7eb}
 .popup-body{padding:12px 16px 14px}
-.popup-body b{display:block;font-size:15px;margin-bottom:4px}
-.popup-body p{margin:0;font-size:13.5px;line-height:1.55}
+.popup-body b{display:block;font-size:15px;margin-bottom:4px;color:#111827}
+.popup-body p{margin:0 0 6px;font-size:13.5px;line-height:1.55;color:#1f2937}
+.popup-body .rate{font-size:12.5px;color:#92400e;margin-bottom:4px}
+.popup-body a{font-size:12.5px;color:#1d4ed8}
+.popup-body .src{font-size:11px;color:#6b7280;margin-top:4px}
 .notes{margin:10px 12px 20px;font-size:12.5px;line-height:1.6}
-.notes h2{font-size:14px;margin:10px 0 4px}
+.notes h2{font-size:14px;margin:12px 0 4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0}
+.card b{display:block;margin-bottom:2px}
+.notes a{color:#2563eb}
 </style>
 </head>
 <body>
@@ -33,27 +41,47 @@ h1{font-size:18px;margin:10px 12px 4px}
 <div class="legend" id="legend"></div>
 <div id="map"></div>
 <div class="notes">
-<h2>הערות</h2>
-<p>הקואורדינטות לקוחות מ-Google Places. לא נוספו תמונות בגרסה זו.</p>
-<p>לוח הזמנים של קו 710 לחורף ושירות יום ראשון לא אומתו. יש לבדוק מול OSEA לפני היציאה.</p>
-<p>לפי ביקורות ב-Google, מעבר דריניה פתוח 24 שעות. לגבי תחבורה בצד הצפוני יש דיווחים סותרים: ביקורת אחת מזכירה אוטובוס חינמי, אחרת מציינת שאין, ומונית של כ-6 ק"מ דווחה כ-20 יורו. המחירים הם הערכה בלבד.</p>
-<p>סלמיס נמצאת כ-10 ק"מ צפונית לעיר ואינה חלק ממסלול האוטובוסים. קיריניה הושמטה כי אינה מתאימה ליום אחד.</p>
-<p>ישראלים: יש לעיין באזהרת משרד החוץ לגבי צפון קפריסין, ואין ללון בצפון.</p>
+<h2>אפשרויות תחבורה (נבדק ב-1.11.2026)</h2>
+<div class="card"><b>אוטובוס קו 710, איה נאפה לדריניה (OSEA)</b>
+יציאה מאיה נאפה: 08:00, 11:30, 15:30. חזרה מדריניה: 05:50, 11:45, 14:15, 17:45. משך כ-50 דקות, פועל כל יום, תקף עד 15.11.2026. נסיעה אחת 2.00 יורו (04:00 עד 21:00). הנתונים נקראו אוטומטית מקובץ PDF של OSEA ויש לאמת אותם לפני היציאה בטלפון 8000 5200 או בקישור למטה.
+<br><a href="https://osea.com.cy/en/bus-routes/" target="_blank" rel="noopener">דף קווי OSEA</a></div>
+<div class="card"><b>מעבר רגלי בדריניה</b>
+לפי Google פתוח 24 שעות, נדרש דרכון. אין צורך ברכב.</div>
+<div class="card"><b>מונית בצפון, מהמעבר לפמגוסטה</b>
+כ-6 ק"מ, כ-20 יורו לפי ביקורת אחת ב-Google. הערכה בלבד. דיווחים סותרים על אוטובוס חינמי בצד הצפוני.</div>
+<h2>הצעת לוח זמנים (הערכה)</h2>
+<div class="card">08:00 יציאה מאיה נאפה, כ-08:50 בדריניה, חציית המעבר, פמגוסטה וורושה, חזרה למעבר עד 17:15, אוטובוס 17:45 לאיה נאפה, הגעה כ-18:35. זמני הליכה ונסיעה בצפון לא אומתו. מי שמפספס את אוטובוס 17:45 צריך מונית, ומחירה לא אומת.</div>
+<h2>מה הושמט</h2>
+<p>קיריניה: כ-71 ק"מ מפמגוסטה, כשעה נסיעה לכל כיוון, דולמוש ללא לוח קבוע ותשלום במזומן, לא מתאים ליום אחד. תחנת האוטובוסים של פמגוסטה נשארה כנקודת תחבורה בלבד, דירוג 3.8.</p>
+<h2>הערות דיוק</h2>
+<p>הקואורדינטות לקוחות מ-Google Places. חוף מרעש משמש נקודה מייצגת לעיר הנטושה ורושה כולה. תחנת איה נאפה היא תחנת "Ag. Napa Monastery - Square". דירוגים נכונים ל-1.11.2026.</p>
+<p>תמונות בחלונות לא נוספו: דורשות אישור לשימוש בתמונות מגוגל מפות, שהן תרומות משתמשים.</p>
+<p>ישראלים: יש לעיין באזהרת משרד החוץ לגבי צפון קפריסין, אין סיוע קונסולרי בצפון ואין ללון שם.</p>
+<h2>מה שונה בגרסה זו</h2>
+<p>נוספו לוח זמנים מאומת מול OSEA, דירוג וקישור לגוגל מפות בכל נקודה, ופירוט מה הושמט.</p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 var cats={t:{name:'תחבורה ומעבר',color:'#0d9488'},s:{name:'אתרים בפמגוסטה',color:'#7c3aed'},o:{name:'אופציונלי',color:'#d97706'}};
-// [name, cat, lat, lon, desc]
+// name, cat, lat, lon, desc, google query, place id, rating, raters, photo url
 var points=[
-['תחנת מנזר איה נאפה','t',34.9883845,34.0003599,'נקודת התחלה אפשרית לקו 710 לכיוון דריניה. שעות הקו לא אומתו.'],
-['מעבר דריניה','t',35.071544,33.9604703,'מעבר הולכי רגל. נדרש דרכון. לפי Google פתוח 24 שעות.'],
-['תחנת אוטובוסים\nפמגוסטה','t',35.1214303,33.9311044,'מסוף האוטובוסים של פמגוסטה. ביום חמישי פועל שם שוק.'],
-['ורושה\nוחוף מרעש','s',35.103273,33.9645242,'העיר הנטושה. אפשר לבקר בחלקים מוגדרים בשעות היום. דירוג 4.8 ב-Google.'],
-['מגדל אותלו','s',35.1274147,33.9436428,'מגדל הגנה בנמל העיר העתיקה. כניסה בתשלום קטן.'],
-['מסגד לאלה מוסטפא פאשה','s',35.125004,33.9431972,'קתדרלת סנט ניקולס לשעבר, בסגנון גותי. נדרש לכסות כתפיים וברכיים.'],
-['חורבות\nהארמון הוונציאני','s',35.124367,33.94064,'שרידי ארמון ושער בעל שלושה קשתות בלב העיר העתיקה.'],
-['חורבות סלמיס','o',35.1862482,33.9034914,'אתר ארכיאולוגי כ-10 ק"מ צפונית. דורש תחבורה נוספת. לא כלול במסלול הבסיסי.']
+['תחנת מנזר איה נאפה','t',34.9883845,34.0003599,'תחנה בקו 710 לכיוון דריניה. יציאות: 08:00, 11:30, 15:30.','Ag. Napa Monastery Square bus stop','ChIJ7bm0phPF3xQR7E97r41nSGo',null,0,''],
+['מעבר דריניה','t',35.071544,33.9604703,'מעבר הולכי רגל. נדרש דרכון. לפי Google פתוח 24 שעות.','Deryneia Crosspoint','ChIJtQEITeXJ3xQRCnjaISULQRM',4.2,221,''],
+['תחנת אוטובוסים | פמגוסטה','t',35.1214303,33.9311044,'מסוף האוטובוסים של פמגוסטה. ביום חמישי פועל שם שוק. נקודת תחבורה בלבד.','Famagusta Bus Terminal','ChIJtWbubDXI3xQRhdRv-RMmhXA',3.8,832,''],
+['ורושה | חוף מרעש','s',35.103273,33.9645242,'העיר הנטושה. אפשר לבקר בחלקים מוגדרים בשעות היום, בכ-08:30 עד 20:00 לפי Google.','Maras Plaji Varosha','ChIJYxH-34XJ3xQR9_yDG2D8G7Q',4.8,1653,''],
+['מגדל אותלו','s',35.1274147,33.9436428,'מגדל הגנה בנמל העיר העתיקה, עם תצפית על העיר. כניסה בתשלום.','Othello Tower Famagusta','ChIJlQVuKvbJ3xQRXvoYQ-PiaXc',4.6,114,''],
+['מסגד לאלה מוסטפא פאשה','s',35.125004,33.9431972,'קתדרלת סנט ניקולס לשעבר, בסגנון גותי. נדרש לכסות כתפיים וברכיים.','Lala Mustafa Pasa Mosque Famagusta','ChIJDYHaBwDJ3xQRXtADGj_kgf4',4.8,1213,''],
+['חורבות הארמון הוונציאני','s',35.124367,33.94064,'שרידי ארמון ושער בעל שלוש קשתות בלב העיר העתיקה.','Venetian palace ruins Famagusta','ChIJQ8MZkTDI3xQR8KEfy_kjLRo',4.5,228,''],
+['חורבות סלמיס','o',35.1862482,33.9034914,'אתר ארכיאולוגי כ-10 ק"מ צפונית. דורש תחבורה נוספת ולא כלול במסלול הבסיסי.','Salamis Ruins','ChIJgW71IAC33xQRzi1d0aGyxvc',4.7,40,'']
 ];
+function wrapLabel(name){
+  var lines=[];
+  name.split(' | ').forEach(function(seg){
+    var w=seg.split(' ');
+    for(var i=0;i<w.length;i+=2){lines.push(w.slice(i,i+2).join(' '));}
+  });
+  return lines.join('\n');
+}
 var map=L.map('map').setView([35.07,33.96],11);
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Tiles &copy; Esri'}).addTo(map);
 var markers=[],bounds=[];
@@ -61,18 +89,26 @@ points.forEach(function(p){
   var c=cats[p[1]];
   var el=document.createElement('div');el.className='place-marker';
   el.innerHTML='<span class="dot" style="background:'+c.color+'"></span><span class="label"></span>';
-  el.querySelector('.label').textContent=p[0];
+  el.querySelector('.label').textContent=wrapLabel(p[0]);
   var m=L.marker([p[2],p[3]],{icon:L.divIcon({className:'lf-icon',html:el,iconSize:null,iconAnchor:[9,9]})}).addTo(map);
-  var html='<div class="popup-body"><b></b><p></p></div>';
   m.on('click',function(e){
     L.DomEvent.stopPropagation(e);
     if(map._pop && map._pop._src===m){map.closePopup();map._pop=null;return;}
     map.closePopup();
     var h=map.getContainer().clientHeight;
     var pop=L.popup({closeButton:false,maxWidth:300,maxHeight:h-90,autoPanPaddingTopLeft:[10,10],autoPanPaddingBottomRight:[10,10],offset:[0,-8]}).setLatLng([p[2],p[3]]);
-    var d=document.createElement('div');d.innerHTML=html;
-    d.querySelector('b').textContent=p[0].replace('\n',' ');
-    d.querySelector('p').textContent=p[4];
+    var d=document.createElement('div');
+    if(p[9]){var im=document.createElement('img');im.className='thumb';im.loading='lazy';im.src=p[9];im.onerror=function(){im.style.display='none';};d.appendChild(im);}
+    var b=document.createElement('div');b.className='popup-body';
+    var t=document.createElement('b');t.textContent=p[0].replace(' | ',' ');b.appendChild(t);
+    var r=document.createElement('div');r.className='rate';
+    r.textContent=p[7]?('★ '+p[7]+' ('+p[8]+' דירוגים בגוגל)'):'אין דירוג בגוגל';b.appendChild(r);
+    var pp=document.createElement('p');pp.textContent=p[4];b.appendChild(pp);
+    var a=document.createElement('a');a.target='_blank';a.rel='noopener';
+    a.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p[5])+'&query_place_id='+p[6];
+    a.textContent='פתח בגוגל מפות';b.appendChild(a);
+    var s=document.createElement('div');s.className='src';s.textContent='מקור: Google Places';b.appendChild(s);
+    d.appendChild(b);
     pop.setContent(d);pop._src=m;pop.openOn(map);map._pop=pop;
   });
   m._cat=p[1];markers.push(m);bounds.push([p[2],p[3]]);
@@ -84,7 +120,7 @@ Object.keys(cats).forEach(function(k){
   var ch=document.createElement('span');ch.className='chip';
   ch.innerHTML='<i style="background:'+cats[k].color+'"></i>'+cats[k].name;
   var on=true;
-  ch.onclick=function(){on=!on;ch.classList.toggle('off',!on);map.closePopup();
+  ch.onclick=function(){on=!on;ch.classList.toggle('off',!on);map.closePopup();map._pop=null;
     markers.forEach(function(m){if(m._cat===k){on?m.addTo(map):map.removeLayer(m);}});};
   lg.appendChild(ch);
 });
