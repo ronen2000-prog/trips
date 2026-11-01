@@ -56,12 +56,16 @@ ul{padding-inline-start:20px;font-size:13.5px;line-height:1.6}
 .lg.busc span{width:18px;height:4px;border-radius:2px}
 .bus-pop h4{margin:0 0 6px!important}
 .bus-pop .lines b{display:inline-block;color:#fff;border-radius:6px;padding:0 6px;margin-inline-end:4px;font-size:12px}
+#mapwrap{position:relative}
+#mapwrap.fs{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column}
+#mapwrap.fs #map{flex:1;height:auto;min-height:0}
+.fsbtn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:#fff;color:#1f2937;border:0;font-size:20px;line-height:1;cursor:pointer;padding:0}
 </style></head><body>
 <header><h1>איה נאפה: חופים, אטרקציות, שייט, מסעדות ובתי קפה</h1>
-<p>72 נקודות מאומתות. טברנות, מסעדות ובתי קפה: רק ציון 4.6 ומעלה ויותר מ-100 ביקורות בגוגל. לחיצה על נקודה פותחת תמונה, תיאור ומקור. לחיצה על קטגוריה במקרא מסתירה או מציגה אותה, "הכל" מדליק הכל, ולחיצה נוספת מכבה הכל. "מים טורקיז" מסנן את החופים הטורקיזיים, וכשכל השאר כבוי הוא מציג רק אותם. המלון מסומן בצהוב ומוצג תמיד. קווי האוטובוס המקומיים (101, 102, 201, 202) מופיעים בשורה "קווי אוטובוס" מתחת למקרא.</p></header>
-<div class="legend"><button class="lg all on" id="showAll">הכל</button><button class="lg on" data-cat="beach"><span style="background:#0d9488"></span>חופים (13)</button><button class="lg on" data-cat="nature"><span style="background:#ea580c"></span>טבע ותצפיות (4)</button><button class="lg on" data-cat="attraction"><span style="background:#7c3aed"></span>אטרקציות ואתרים (7)</button><button class="lg on" data-cat="boat"><span style="background:#dc2626"></span>יציאות שייט (3)</button><button class="lg on" data-cat="tavern"><span style="background:#b45309"></span>טברנות (17)</button><button class="lg on" data-cat="food"><span style="background:#65a30d"></span>מסעדות אחרות (21)</button><button class="lg on" data-cat="cafe"><span style="background:#db2777"></span>בתי קפה (6)</button><button class="lg tq on" data-cat="tq"><span style="background:#14b8a6"></span>מים טורקיז (9)</button></div>
+<p>72 נקודות מאומתות. טברנות, מסעדות ובתי קפה: רק ציון 4.6 ומעלה ויותר מ-100 ביקורות בגוגל. לחיצה על נקודה פותחת תמונה, תיאור ומקור. לחיצה על קטגוריה במקרא מסתירה או מציגה אותה, "הכל" מדליק הכל, ולחיצה נוספת מכבה הכל. "מים טורקיז" מסנן את החופים הטורקיזיים, וכשכל השאר כבוי הוא מציג רק אותם. המלון מסומן בצהוב ומוצג תמיד. קווי האוטובוס המקומיים (101, 102, 201, 202) מופיעים בשורה "קווי אוטובוס" מתחת למקרא. הכפתור ⛶ בפינת המפה פותח מסך מלא.</p></header>
+<div id="mapwrap"><div class="legend"><button class="lg all on" id="showAll">הכל</button><button class="lg on" data-cat="beach"><span style="background:#0d9488"></span>חופים (13)</button><button class="lg on" data-cat="nature"><span style="background:#ea580c"></span>טבע ותצפיות (4)</button><button class="lg on" data-cat="attraction"><span style="background:#7c3aed"></span>אטרקציות ואתרים (7)</button><button class="lg on" data-cat="boat"><span style="background:#dc2626"></span>יציאות שייט (3)</button><button class="lg on" data-cat="tavern"><span style="background:#b45309"></span>טברנות (17)</button><button class="lg on" data-cat="food"><span style="background:#65a30d"></span>מסעדות אחרות (21)</button><button class="lg on" data-cat="cafe"><span style="background:#db2777"></span>בתי קפה (6)</button><button class="lg tq on" data-cat="tq"><span style="background:#14b8a6"></span>מים טורקיז (9)</button></div>
 <div class="legend bus"><span class="lbl">קווי אוטובוס:</span><button class="lg busc" data-bus="101"><span style="background:#1e40af"></span>קו 101</button><button class="lg busc" data-bus="102"><span style="background:#0284c7"></span>קו 102</button><button class="lg busc" data-bus="201"><span style="background:#475569"></span>קו 201</button><button class="lg busc" data-bus="202"><span style="background:#c026d3"></span>קו 202</button></div>
-<div id="map"></div>
+<div id="map"></div></div>
 <main>
 <h2>לפני היציאה: בדיקות לבעלי דרכון ישראלי (נבדק 29.10.2026)</h2>
 <ul>
@@ -254,4 +258,18 @@ function applyBus(){
 }
 busBtns.forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('on');applyBus();});});
 applyBus();
+
+var wrap=document.getElementById('mapwrap'),fsBtn;
+function setFs(on){ wrap.classList.toggle('fs',on); document.body.style.overflow=on?'hidden':'';
+  fsBtn.textContent=on?'\u2715':'\u26F6'; fsBtn.title=on?'יציאה ממסך מלא':'מסך מלא'; fsBtn.setAttribute('aria-label',fsBtn.title);
+  map.closePopup(); setTimeout(function(){map.invalidateSize();},150); }
+function toggleFs(){ var on=!wrap.classList.contains('fs'); setFs(on);
+  if(on&&wrap.requestFullscreen){wrap.requestFullscreen().catch(function(){});}
+  else if(!on&&document.fullscreenElement&&document.exitFullscreen){document.exitFullscreen().catch(function(){});} }
+var FsCtl=L.Control.extend({options:{position:'topleft'},onAdd:function(){
+  var c=L.DomUtil.create('div','leaflet-bar'); fsBtn=L.DomUtil.create('button','fsbtn',c); fsBtn.type='button';
+  L.DomEvent.disableClickPropagation(c); L.DomEvent.on(fsBtn,'click',toggleFs); return c;}});
+map.addControl(new FsCtl()); setFs(false);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&wrap.classList.contains('fs')){setFs(false);}});
+document.addEventListener('fullscreenchange',function(){if(!document.fullscreenElement&&wrap.classList.contains('fs')){setFs(false);}});
 </script></body></html>
