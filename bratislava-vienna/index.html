@@ -722,7 +722,7 @@ main{max-width:1100px;margin:0 auto;padding:12px 16px 40px}
 <body>
 <header>
   <h1>ברטיסלבה + וינה, רביעי 18.11 עד ראשון 22.11</h1>
-  <p class="sub" style="font-size:19px;font-weight:800;color:#5eead4">לסינון, הקלק על הנקודות במקרא</p>
+  <p class="sub" style="font-size:19px;font-weight:800;color:#5eead4">לסינון, הקלק על הנקודות במקרא. "הכל" מחזיר את כל הנקודות</p>
 </header>
 <div class="legend">
   <button class="lg on" data-all="1"><i style="background:conic-gradient(#0d9488 0 17%,#16a34a 0 34%,#7c3aed 0 50%,#e11d48 0 67%,#f59e0b 0 84%,#2563eb 0)"></i>הכל</button>
@@ -930,15 +930,12 @@ L.polyline([[48.1586781,17.1062057],[48.1851873,16.3765973]],{color:'#475569',we
   map.addControl(new C());
 })();
 
-var ALLB=document.querySelector('.lg[data-all]');
-function syncAll(){ ALLB.classList.toggle('on',[].every.call(document.querySelectorAll('.lg[data-cat]'),function(b){return b.classList.contains('on');})); }
-ALLB.addEventListener('click',function(){ map.closePopup(); document.querySelectorAll('.lg[data-cat]').forEach(function(b){b.classList.add('on');}); MK.forEach(function(x){ if(!map.hasLayer(x.m)) x.m.addTo(map); }); syncAll(); });
-document.querySelectorAll('.lg[data-cat]').forEach(function(b){b.addEventListener('click',function(){
-  b.classList.toggle('on'); var on=b.classList.contains('on'), c=b.getAttribute('data-cat');
-  map.closePopup();
-  MK.forEach(function(x){ if(x.cat===c){ if(on){ if(!map.hasLayer(x.m)) x.m.addTo(map); } else map.removeLayer(x.m); } });
-  syncAll();
-});});
+function fitCat(list){ var ll=list.map(function(x){return x.m.getLatLng();}); if(!ll.length) return; if(ll.length===1) map.setView(ll[0],15); else map.fitBounds(L.latLngBounds(ll),{padding:[40,40],maxZoom:15}); document.querySelectorAll('.views button').forEach(function(v){v.classList.remove('on');}); }
+function showCat(c){ map.closePopup(); var vis=[];
+  document.querySelectorAll('.lg').forEach(function(b){ b.classList.toggle('on', c==='all' ? true : b.getAttribute('data-cat')===c); });
+  MK.forEach(function(x){ var on=(c==='all'||x.cat===c); if(on){ if(!map.hasLayer(x.m)) x.m.addTo(map); vis.push(x); } else map.removeLayer(x.m); });
+  fitCat(vis); }
+document.querySelectorAll('.lg').forEach(function(b){ b.addEventListener('click',function(){ showCat(b.getAttribute('data-all')?'all':b.getAttribute('data-cat')); }); });
 </script>
 <script data-goatcounter="https://ronen2000.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
