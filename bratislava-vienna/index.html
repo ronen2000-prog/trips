@@ -725,6 +725,7 @@ main{max-width:1100px;margin:0 auto;padding:12px 16px 40px}
   <p class="sub" style="font-size:19px;font-weight:800;color:#5eead4">לסינון, הקלק על הנקודות במקרא</p>
 </header>
 <div class="legend">
+  <button class="lg on" data-all="1"><i style="background:conic-gradient(#0d9488 0 17%,#16a34a 0 34%,#7c3aed 0 50%,#e11d48 0 67%,#f59e0b 0 84%,#2563eb 0)"></i>הכל</button>
   <button class="lg on" data-cat="bra"><i style="background:#0d9488"></i>ברטיסלבה עיר</button>
   <button class="lg on" data-cat="nat"><i style="background:#16a34a"></i>טבע והליכות</button>
   <button class="lg on" data-cat="vie"><i style="background:#7c3aed"></i>וינה</button>
@@ -926,10 +927,14 @@ L.polyline([[48.1586781,17.1062057],[48.1851873,16.3765973]],{color:'#475569',we
   map.addControl(new C());
 })();
 
+var ALLB=document.querySelector('.lg[data-all]');
+function syncAll(){ ALLB.classList.toggle('on',[].every.call(document.querySelectorAll('.lg[data-cat]'),function(b){return b.classList.contains('on');})); }
+ALLB.addEventListener('click',function(){ map.closePopup(); document.querySelectorAll('.lg[data-cat]').forEach(function(b){b.classList.add('on');}); MK.forEach(function(x){ if(!map.hasLayer(x.m)) x.m.addTo(map); }); syncAll(); });
 document.querySelectorAll('.lg[data-cat]').forEach(function(b){b.addEventListener('click',function(){
   b.classList.toggle('on'); var on=b.classList.contains('on'), c=b.getAttribute('data-cat');
   map.closePopup();
   MK.forEach(function(x){ if(x.cat===c){ if(on){ if(!map.hasLayer(x.m)) x.m.addTo(map); } else map.removeLayer(x.m); } });
+  syncAll();
 });});
 </script>
 <script data-goatcounter="https://ronen2000.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
