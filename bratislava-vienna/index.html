@@ -739,7 +739,7 @@ main{max-width:1100px;margin:0 auto;padding:12px 16px 40px}
   <button class="lg on" data-cat="wine"><i style="background:#f59e0b"></i>יקבים וטברנות</button>
   <button class="lg on" data-cat="air"><i style="background:#475569"></i>תחבורה</button>
   <span class="lg on" style="cursor:default;background:#facc15;color:#111827;border-color:#111827"><i style="background:#111827;outline:2px solid #facc15"></i>המלונות שלנו (תמיד מוצגים)</span>
-  <span class="lg on" style="cursor:default"><b style="color:#dc2626;font-size:16px;line-height:1">&#9733;</b> המיקום הנוכחי שלי (כפתור &#9678; במפה)</span>
+  <span class="lg on" style="cursor:default"><b style="color:#facc15;font-size:17px;line-height:1;-webkit-text-stroke:1px #111827">&#9733;</b> המיקום הנוכחי שלי (כפתור &#9678; במפה)</span>
   <button class="lg on" data-cat="kosher"><i style="background:#2563eb"></i>כשר: מסעדות ובתי חב"ד</button>
 </div>
 <div class="views">
@@ -836,7 +836,7 @@ main{max-width:1100px;margin:0 auto;padding:12px 16px 40px}
     <li>שעות לפי גוגל, מקורות כשרות: <a href="https://www.ikg-wien.at/en/experience/drink-and-dine" target="_blank" rel="noopener">IKG וינה</a>, <a href="https://chabadvienna.com/en/food/" target="_blank" rel="noopener">חב"ד וינה</a>, <a href="https://www.chabadslovakia.com/?lang=en" target="_blank" rel="noopener">חב"ד סלובקיה</a>. לוודא שעות לפני שיוצאים.</li>
   </ul></div>
   <p class="note">מה ירד ולמה: המסלול בדווינסקה קוביילה ובסנדברג ירד, כי המעבר לווינה הוקדם לחמישי בצהריים. יום הקרפטים הקטנים (פזינוק, מודרה) ירד כדי לפנות יום שני לווינה. וואכאו וזיגרוטה רחוקות מדי. שווקי החג בברטיסלבה נפתחים רק ב-26 עד 27.11, אחרי הטיול. נקודת סנדברג היא מרכז השכונה ולא הדיונה. תמונות: Google Maps (העלאות משתמשים).</p>
-  <p class="note"><b>נוסף 18.11.2026:</b> כפתור מיקום חי (מתחת לכפתור המסך המלא): לחיצה מציגה כוכב אדום במיקום הנוכחי ועוקבת אחריו, לחיצה נוספת מכבה. המיקום נשאר במכשיר ולא נשלח לשום מקום.</p>
+  <p class="note"><b>נוסף 18.11.2026:</b> כפתור מיקום חי (מתחת לכפתור המסך המלא): לחיצה מציגה כוכב צהוב במיקום הנוכחי ועוקבת אחריו, לחיצה נוספת מכבה. המיקום נשאר במכשיר ולא נשלח לשום מקום.</p>
   <p class="note"><b>נוסף 16.11.2026:</b> Mirror Bar (4.7, 774 מדרגים) ושוק חג המולד ב-Eurovea (פתוח 13.11 עד 23.12.2026 לפי Bratislavské noviny ו-Citylife; שעות 2026 לא פורסמו). נקודת השוק מסומנת על טיילת Eurovea, שם השוק לפי הכתבה, והדירוג בחלון הוא של הטיילת.</p>
   <p class="note"><b>מה השתנה בגרסה הזו (1.11.2026):</b> סף דירוג למפה הזו: 4.3 ומעלה בגוגל. בכל מקום אוכל מוצגת רמת המחיר בגוגל (€ עד €€€€). נאשמרקט (3.6) ירד מהמפה, ושוק הפשפשים בשבת נשאר בתוכנית. נוסף ההויריגר אוברמן בגרינצינג (4.7) בקטגוריה חדשה של יקבים וטברנות, לצד מאייר אם פפרפלאץ. נקודת קאלנברג הועברה לתצפית Kahlenbergplatzl (4.8, 78 מדרגים) במקום נקודה עם 11 מדרגים. חלון המידע נסגר בלחיצה נוספת על אותה נקודה או על המפה, בלי כפתור X.</p>
   <p class="note"><b>חריגים שנשארו בכוונה:</b> שוק החורף בפראטר (נפתח ב-20.11, עדיין 2 מדרגים בלבד), בית חב"ד אופרה (בלי דירוג), תחנת הרכבת בברטיסלבה (2.8) ושדה התעופה BTS (4.0). אלה נקודות לוגיסטיות או חלק מהתוכנית, לא המלצות.</p>
@@ -952,7 +952,7 @@ L.polyline([[48.1586781,17.1062057],[48.1851873,16.3765973]],{color:'#475569',we
     first=true; btn.classList.add('on'); btn.title='הסתר את המיקום שלי';
     WID=navigator.geolocation.watchPosition(function(pos){
       var ll=[pos.coords.latitude,pos.coords.longitude], r=pos.coords.accuracy||0;
-      if(!DOT){ DOT=L.marker(ll,{icon:L.divIcon({className:'me-star',html:'<svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 1.8l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.6l-6.3 3.6 1.5-7.1L1.8 9.2 9 8.4z" fill="#dc2626" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>',iconSize:[30,30],iconAnchor:[15,15]}),interactive:false,keyboard:false,pane:'me'}).addTo(map); }
+      if(!DOT){ DOT=L.marker(ll,{icon:L.divIcon({className:'me-star',html:'<svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 1.8l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.6l-6.3 3.6 1.5-7.1L1.8 9.2 9 8.4z" fill="#facc15" stroke="#111827" stroke-width="1.6" stroke-linejoin="round"/></svg>',iconSize:[30,30],iconAnchor:[15,15]}),interactive:false,keyboard:false,pane:'me'}).addTo(map); }
       else { DOT.setLatLng(ll); }
       if(first){ first=false; map.setView(ll,Math.max(map.getZoom(),15)); }
     },function(err){ stop(); alertMsg(err.code===1?'אין הרשאת מיקום. יש לאשר מיקום לאתר בהגדרות הדפדפן':'לא התקבל מיקום, נסו שוב'); },
